@@ -26,3 +26,12 @@ button {
 .error-message {
   color: red;
 }
+
+.li1 {
+  min-height: 100px;
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
