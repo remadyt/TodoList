@@ -1,6 +1,8 @@
-import {AllTasksType, FilterType} from "../App";
+
 import {v1} from "uuid";
 import {AddTodoListActionType, RemoveTodoListActionType} from "./todolists-reducer";
+import { AllTasksType } from "../App";
+
 
 
 
@@ -21,19 +23,19 @@ export const tasksReducer = (state: AllTasksType = initialState, action: Actions
 
         case "CHANGE_TASK_STATUS": {
             let tasks = state[action.todoListId]
-            let task = tasks.find(task => task.id === action.taskId)
-            if (task) {
-                task.isDone = action.isDone
-            }
+            state[action.todoListId] = tasks.
+            map(t => t.id === action.taskId
+                ? {...t, isDone: action.isDone}
+                : t)
             return {...state}
 
         }
         case "CHANGE_TASK_TITLE": {
             let tasks = state[action.todoListId]
-            let task = tasks.find(task => task.id === action.taskId)
-            if (task) {
-                task.title = action.newTitle
-            }
+            state[action.todoListId] = tasks.
+            map(t => t.id === action.taskId
+                ? {...t,title: action.newTitle}
+                : t)
             return {...state}
         }
         case "ADD_TODOLIST":
@@ -72,11 +74,11 @@ export const changeTaskStatusAC = (taskId: string, isDone: boolean, todoListId: 
     todoListId
 } as const)
 
-export const changeTaskTitleAC = (taskId: string, todoListId: string, newTitle: string) => ({
+export const changeTaskTitleAC = (taskId: string, newTitle: string, todoListId: string) => ({
     type: 'CHANGE_TASK_TITLE',
     taskId,
-    todoListId,
-    newTitle
+    newTitle,
+    todoListId
 } as const)
 
 

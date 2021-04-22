@@ -7,7 +7,8 @@ type AddItemFormPropsType = {
 
 }
 
-function AddItemForm (props:AddItemFormPropsType) {
+const AddItemForm = React.memo((props:AddItemFormPropsType) => {
+    console.log('addItemForm clicked')
     const [title, setTitle] = useState('')
     const [error,setError] = useState<boolean>(false)
     const onKeyPressAddTask = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -37,13 +38,10 @@ function AddItemForm (props:AddItemFormPropsType) {
             label={'Title'}
             error={error}
             />
-           {/* <input
-                className={error ? 'error' : ''}
-                />*/}
             <IconButton onClick={addItem}><AddBox/></IconButton>
             {error && <div className='error-message'>{error}</div>}
         </div>
     )
-}
+})
 
 export default AddItemForm;
